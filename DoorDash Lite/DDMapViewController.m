@@ -12,7 +12,6 @@
 @interface DDMapViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-- (IBAction)chooseAddress:(id)sender;
 
 @property (assign, nonatomic) CLLocationCoordinate2D currentLocation;
 @property (copy, nonatomic) NSString *currentAddress;
@@ -31,14 +30,15 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   
-  CLLocationCoordinate2D startLocation;
+  // set map center to location selected previously
+  if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"LastLatitude"] && [[NSUserDefaults standardUserDefaults] doubleForKey:@"LastLongitude"]) {
+    self.currentLocation = CLLocationCoordinate2DMake([[NSUserDefaults standardUserDefaults] doubleForKey:@"LastLatitude"],
+                                                      [[NSUserDefaults standardUserDefaults] doubleForKey:@"LastLongitude"]);
+  } else {
+    self.currentLocation = CLLocationCoordinate2DMake(37.787072, -122.400451);
+  }
   
-  //TODO: set to previous location after persistence is implemented
-  startLocation.latitude = 37.787072;
-  startLocation.longitude = -122.400451;
-  self.currentLocation = startLocation;
-  
-  MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(startLocation, 2.0 * METERS_PER_MILE, 2.0 * METERS_PER_MILE);
+  MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.currentLocation, 2.0 * METERS_PER_MILE, 2.0 * METERS_PER_MILE);
   [self.mapView setRegion:viewRegion animated:YES];
   
   [self updateAddressWithCoordinate:self.currentLocation];
@@ -60,7 +60,7 @@
                    if (error == nil && [placemarks count] > 0) {
                      CLPlacemark *placemark = [placemarks lastObject];
                      weakSelf.currentAddress = [NSString stringWithFormat:@"%@ %@", placemark.subThoroughfare, placemark.thoroughfare];
-                     
+                     // update address text
                      dispatch_async(dispatch_get_main_queue(), ^{
                        weakSelf.addressLabel.text = weakSelf.currentAddress;
                      });
@@ -68,12 +68,17 @@
                      NSLog(@"%@", error.debugDescription);
                    }
                  }];
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"mapToTabBar"]) {
     
+    // save confirmed location for persistence
+    [[NSUserDefaults standardUserDefaults] setDouble:self.currentLocation.latitude forKey:@"LastLatitude"];
+    [[NSUserDefaults standardUserDefaults] setDouble:self.currentLocation.longitude forKey:@"LastLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    // send location to list view to load local stores
     UITabBarController *tabBarVC = (UITabBarController *)segue.destinationViewController;
     DDStoresListViewController *exploreVC = (DDStoresListViewController *)tabBarVC.viewControllers[0];
     exploreVC.listLocation = self.currentLocation;
