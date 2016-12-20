@@ -9,23 +9,35 @@
 /* Begin PBXBuildFile section */
 		2C2EAAC71E05D95600367160 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAAC61E05D95600367160 /* main.m */; };
 		2C2EAACA1E05D95600367160 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAAC91E05D95600367160 /* AppDelegate.m */; };
-		2C2EAACD1E05D95600367160 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAACC1E05D95600367160 /* ViewController.m */; };
+		2C2EAACD1E05D95600367160 /* DDMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAACC1E05D95600367160 /* DDMapViewController.m */; };
 		2C2EAAD01E05D95600367160 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2EAACE1E05D95600367160 /* Main.storyboard */; };
 		2C2EAAD21E05D95600367160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C2EAAD11E05D95600367160 /* Assets.xcassets */; };
 		2C2EAAD51E05D95600367160 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C2EAAD31E05D95600367160 /* LaunchScreen.storyboard */; };
+		2C2EAADE1E05DAE000367160 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C2EAADD1E05DAE000367160 /* MapKit.framework */; };
+		2C2EAAE11E05DC8300367160 /* DDStoresListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAAE01E05DC8300367160 /* DDStoresListViewController.m */; };
+		2C2EAAE51E06121300367160 /* DDStoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAAE41E06121300367160 /* DDStoreTableViewCell.m */; };
+		CE39A29D38FDD0AA15BD7DAD /* Pods_DoorDash_Lite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19093292D3470E05C8466FD4 /* Pods_DoorDash_Lite.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19093292D3470E05C8466FD4 /* Pods_DoorDash_Lite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DoorDash_Lite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2EAAC21E05D95600367160 /* DoorDash Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DoorDash Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2EAAC61E05D95600367160 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2C2EAAC81E05D95600367160 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2C2EAAC91E05D95600367160 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2C2EAACB1E05D95600367160 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2C2EAACC1E05D95600367160 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2C2EAACB1E05D95600367160 /* DDMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDMapViewController.h; sourceTree = "<group>"; };
+		2C2EAACC1E05D95600367160 /* DDMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDMapViewController.m; sourceTree = "<group>"; };
 		2C2EAACF1E05D95600367160 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C2EAAD11E05D95600367160 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C2EAAD41E05D95600367160 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C2EAAD61E05D95600367160 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C2EAADD1E05DAE000367160 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2C2EAADF1E05DC8300367160 /* DDStoresListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStoresListViewController.h; sourceTree = "<group>"; };
+		2C2EAAE01E05DC8300367160 /* DDStoresListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStoresListViewController.m; sourceTree = "<group>"; };
+		2C2EAAE31E06121300367160 /* DDStoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStoreTableViewCell.h; sourceTree = "<group>"; };
+		2C2EAAE41E06121300367160 /* DDStoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStoreTableViewCell.m; sourceTree = "<group>"; };
+		6ABCF876D325EE1E035EACEE /* Pods-DoorDash Lite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash Lite.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DoorDash Lite/Pods-DoorDash Lite.debug.xcconfig"; sourceTree = "<group>"; };
+		6EED8A3731F87FC51E445228 /* Pods-DoorDash Lite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash Lite.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoorDash Lite/Pods-DoorDash Lite.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C2EAADE1E05DAE000367160 /* MapKit.framework in Frameworks */,
+				CE39A29D38FDD0AA15BD7DAD /* Pods_DoorDash_Lite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +58,8 @@
 			children = (
 				2C2EAAC41E05D95600367160 /* DoorDash Lite */,
 				2C2EAAC31E05D95600367160 /* Products */,
+				2C2EAADC1E05DAE000367160 /* Frameworks */,
+				DC862CB37A067E8C7DAC23F7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +74,15 @@
 		2C2EAAC41E05D95600367160 /* DoorDash Lite */ = {
 			isa = PBXGroup;
 			children = (
+				2C2EAAE21E06069F00367160 /* Models */,
 				2C2EAAC81E05D95600367160 /* AppDelegate.h */,
 				2C2EAAC91E05D95600367160 /* AppDelegate.m */,
-				2C2EAACB1E05D95600367160 /* ViewController.h */,
-				2C2EAACC1E05D95600367160 /* ViewController.m */,
+				2C2EAACB1E05D95600367160 /* DDMapViewController.h */,
+				2C2EAACC1E05D95600367160 /* DDMapViewController.m */,
+				2C2EAADF1E05DC8300367160 /* DDStoresListViewController.h */,
+				2C2EAAE01E05DC8300367160 /* DDStoresListViewController.m */,
+				2C2EAAE31E06121300367160 /* DDStoreTableViewCell.h */,
+				2C2EAAE41E06121300367160 /* DDStoreTableViewCell.m */,
 				2C2EAACE1E05D95600367160 /* Main.storyboard */,
 				2C2EAAD11E05D95600367160 /* Assets.xcassets */,
 				2C2EAAD31E05D95600367160 /* LaunchScreen.storyboard */,
@@ -79,6 +100,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2C2EAADC1E05DAE000367160 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C2EAADD1E05DAE000367160 /* MapKit.framework */,
+				19093292D3470E05C8466FD4 /* Pods_DoorDash_Lite.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C2EAAE21E06069F00367160 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		DC862CB37A067E8C7DAC23F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6ABCF876D325EE1E035EACEE /* Pods-DoorDash Lite.debug.xcconfig */,
+				6EED8A3731F87FC51E445228 /* Pods-DoorDash Lite.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +132,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C2EAAD91E05D95600367160 /* Build configuration list for PBXNativeTarget "DoorDash Lite" */;
 			buildPhases = (
+				E88DEC209FC716F935DD2E0B /* [CP] Check Pods Manifest.lock */,
 				2C2EAABE1E05D95600367160 /* Sources */,
 				2C2EAABF1E05D95600367160 /* Frameworks */,
 				2C2EAAC01E05D95600367160 /* Resources */,
+				CCF0DAB14460CA3DE57D5D1A /* [CP] Embed Pods Frameworks */,
+				293073E31831DEABE62CF9D5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -145,13 +194,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		293073E31831DEABE62CF9D5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DoorDash Lite/Pods-DoorDash Lite-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCF0DAB14460CA3DE57D5D1A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DoorDash Lite/Pods-DoorDash Lite-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E88DEC209FC716F935DD2E0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2C2EAABE1E05D95600367160 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C2EAACD1E05D95600367160 /* ViewController.m in Sources */,
+				2C2EAACD1E05D95600367160 /* DDMapViewController.m in Sources */,
+				2C2EAAE51E06121300367160 /* DDStoreTableViewCell.m in Sources */,
 				2C2EAACA1E05D95600367160 /* AppDelegate.m in Sources */,
+				2C2EAAE11E05DC8300367160 /* DDStoresListViewController.m in Sources */,
 				2C2EAAC71E05D95600367160 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +367,7 @@
 		};
 		2C2EAADA1E05D95600367160 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6ABCF876D325EE1E035EACEE /* Pods-DoorDash Lite.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "DoorDash Lite/Info.plist";
@@ -279,6 +379,7 @@
 		};
 		2C2EAADB1E05D95600367160 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EED8A3731F87FC51E445228 /* Pods-DoorDash Lite.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "DoorDash Lite/Info.plist";
@@ -307,6 +408,7 @@
 				2C2EAADB1E05D95600367160 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
