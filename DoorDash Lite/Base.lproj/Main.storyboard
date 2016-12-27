@@ -162,7 +162,7 @@
                                 <connections>
                                     <outlet property="cuisineLabel" destination="nQL-8W-r5c" id="mHi-V8-gHg"/>
                                     <outlet property="deliveryTimeLabel" destination="x2M-MM-ZLM" id="ubG-gb-W8m"/>
-                                    <outlet property="logoImage" destination="Kfz-ed-NkL" id="g2l-z1-tnq"/>
+                                    <outlet property="logoImageView" destination="Kfz-ed-NkL" id="8IQ-Ah-Qsb"/>
                                     <outlet property="nameLabel" destination="sba-HL-hAr" id="Lcy-kZ-3te"/>
                                     <outlet property="priceLabel" destination="b7f-KP-FUj" id="LTH-NA-bVX"/>
                                 </connections>

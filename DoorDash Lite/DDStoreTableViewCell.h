@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DDStoreTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cuisineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;

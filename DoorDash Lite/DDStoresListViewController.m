@@ -8,9 +8,13 @@
 
 #import "DDStoresListViewController.h"
 #import "DDStoreTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
+
+
+#import "AFNetworking.h"
 
 @interface DDStoresListViewController ()
-
+@property (nonatomic, strong) NSArray *storesListArray;
 @end
 
 @implementation DDStoresListViewController
@@ -23,6 +27,33 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  
+  self.navigationController.navigationBar.translucent = NO;
+  self.tabBarController.tabBar.translucent = NO;
+  
+  NSString *rootURLString = @"https://api.doordash.com";
+  
+  __weak UINavigationController *weakNavController = self.navigationController;
+  __weak typeof(self) weakSelf = self;
+  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+  NSString *requestString = [NSString stringWithFormat:@"%@/v1/store_search/?lat=%f&lng=%f", rootURLString, self.listLocation.latitude, self.listLocation.longitude];
+  [manager GET:requestString
+    parameters:nil
+      progress:nil
+       success:^(NSURLSessionTask *task, id responseObject) {
+         if ([responseObject count] > 0) {
+           weakSelf.storesListArray = responseObject;
+           [weakSelf.tableView reloadData];
+         }
+  }    failure:^(NSURLSessionTask *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        UIAlertController *downloadErrorAlert = [UIAlertController alertControllerWithTitle:@"Download Error" message:@"Please try again" preferredStyle:UIAlertControllerStyleAlert];
+        [downloadErrorAlert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [weakNavController popViewControllerAnimated:YES];
+    }]];
+  }];
+  
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,18 +68,40 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+  if ([self.storesListArray count] > 0) {
+    return [self.storesListArray count];
+  } else {
     return 0;
+  }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DDStoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DDStoreCell" forIndexPath:indexPath];
+  DDStoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DDStoreCell" forIndexPath:indexPath];
     
-    // Configure the cell...
-
+  // Configure the cell...
+  NSDictionary *storeDict = self.storesListArray[indexPath.row];
+  cell.nameLabel.text         = storeDict[@"name"];
+  cell.cuisineLabel.text      = storeDict[@"description"];
+  cell.deliveryTimeLabel.text = storeDict[@"status"];
   
-    return cell;
+  NSNumber *deliveryCost      = [NSNumber numberWithDouble:([(NSNumber *)storeDict[@"delivery_fee"] longValue] * 0.01)];
+  NSNumberFormatter *priceFormatter = [[NSNumberFormatter alloc] init];
+  [priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+  cell.priceLabel.text        = [NSString stringWithFormat:@"%@ delivery", [priceFormatter stringFromNumber:deliveryCost]];
+  
+  NSURL *logoImgUrl           = [NSURL URLWithString:storeDict[@"cover_img_url"]];
+  NSURLRequest *logoRequest   = [NSURLRequest requestWithURL:logoImgUrl];
+  
+  __weak DDStoreTableViewCell *weakCell = cell;
+  [weakCell.logoImageView setImageWithURLRequest:logoRequest
+                            placeholderImage:nil
+                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       weakCell.logoImageView.image = image;
+                                       [weakCell setNeedsLayout];
+                                     }
+                                     failure:nil];
+  return cell;
 }
 
 
