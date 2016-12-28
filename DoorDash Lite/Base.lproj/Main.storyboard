@@ -222,15 +222,27 @@
                                         <state key="normal" title="Add to Favorites">
                                             <color key="titleColor" red="0.96470588235294119" green="0.094117647058823528" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pressedFavoriteButton:" destination="PPN-Zo-qqE" eventType="touchUpInside" id="4Z4-36-doJ"/>
+                                        </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-white" translatesAutoresizingMaskIntoConstraints="NO" id="NTi-qt-nQP">
+                                        <rect key="frame" x="97.5" y="186" width="33" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="Nid-Ly-xos"/>
+                                            <constraint firstAttribute="width" constant="33" id="fDI-Dz-vld"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="NTi-qt-nQP" firstAttribute="centerY" secondItem="lLS-r6-Oqw" secondAttribute="centerY" id="5NA-6V-bba"/>
                                     <constraint firstItem="s7j-m0-cRe" firstAttribute="centerX" secondItem="sbD-tQ-Dte" secondAttribute="centerX" id="EYt-uY-IHc"/>
                                     <constraint firstItem="s7j-m0-cRe" firstAttribute="top" secondItem="sbD-tQ-Dte" secondAttribute="top" constant="25" id="OFH-zT-LBM"/>
                                     <constraint firstItem="W2j-30-kVk" firstAttribute="centerX" secondItem="s7j-m0-cRe" secondAttribute="centerX" id="TCD-rD-JYU"/>
                                     <constraint firstItem="lLS-r6-Oqw" firstAttribute="centerX" secondItem="W2j-30-kVk" secondAttribute="centerX" id="kvV-59-x6A"/>
                                     <constraint firstItem="lLS-r6-Oqw" firstAttribute="top" secondItem="W2j-30-kVk" secondAttribute="bottom" constant="23" id="ogu-Uk-iEl"/>
+                                    <constraint firstItem="NTi-qt-nQP" firstAttribute="leading" secondItem="lLS-r6-Oqw" secondAttribute="leading" constant="30" id="wKd-rc-lih"/>
                                     <constraint firstItem="W2j-30-kVk" firstAttribute="top" secondItem="s7j-m0-cRe" secondAttribute="bottom" constant="16" id="ygc-hg-rfT"/>
                                 </constraints>
                             </view>
@@ -269,6 +281,7 @@
                         <outlet property="faveButton" destination="lLS-r6-Oqw" id="LPb-Fo-xoq"/>
                         <outlet property="logoImageView" destination="s7j-m0-cRe" id="Ogb-dg-eCQ"/>
                         <outlet property="menuTableView" destination="82C-Sy-0Vx" id="qPK-iY-yPx"/>
+                        <outlet property="starImageView" destination="NTi-qt-nQP" id="D8b-su-gbe"/>
                         <outlet property="statusLabel" destination="W2j-30-kVk" id="3EQ-GL-OSf"/>
                     </connections>
                 </viewController>
@@ -315,6 +328,7 @@
     </scenes>
     <resources>
         <image name="map-pin" width="31" height="64"/>
+        <image name="star-white" width="15" height="14"/>
         <image name="tab-explore" width="28" height="24"/>
     </resources>
 </document>

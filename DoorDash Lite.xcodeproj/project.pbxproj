@@ -77,7 +77,6 @@
 		2C2EAAC41E05D95600367160 /* DoorDash Lite */ = {
 			isa = PBXGroup;
 			children = (
-				2C2EAAE21E06069F00367160 /* Models */,
 				2C2EAAC81E05D95600367160 /* AppDelegate.h */,
 				2C2EAAC91E05D95600367160 /* AppDelegate.m */,
 				2C2EAACB1E05D95600367160 /* DDMapViewController.h */,
@@ -112,13 +111,6 @@
 				19093292D3470E05C8466FD4 /* Pods_DoorDash_Lite.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2C2EAAE21E06069F00367160 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		DC862CB37A067E8C7DAC23F7 /* Pods */ = {

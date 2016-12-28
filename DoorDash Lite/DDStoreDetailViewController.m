@@ -16,7 +16,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UIButton *faveButton;
 @property (weak, nonatomic) IBOutlet UITableView *menuTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *starImageView;
+
 @property (strong, nonatomic) NSDictionary *menuDictionary;
+@property (strong, nonatomic) NSNumber *storeId;
+@property (nonatomic, strong) UIColor *ddRedColor;
 @end
 
 @implementation DDStoreDetailViewController
@@ -24,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  self.ddRedColor = [UIColor colorWithRed:246.0/255 green:24.0/255 blue:69.0/255 alpha:1.0];
   self.navigationItem.title = self.storeDict[@"name"];
   self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
   
@@ -50,21 +55,49 @@
        success:^(NSURLSessionTask *task, id responseObject) {
          if ([responseObject count] > 0) {
            weakSelf.menuDictionary = responseObject[0];     // responseObject is __NSSingleObjectArrayI
+           weakSelf.storeId = weakSelf.menuDictionary[@"id"];
            [weakSelf.menuTableView reloadData];
+           [weakSelf.faveButton setNeedsDisplay];
          }
-       }    failure:^(NSURLSessionTask *operation, NSError *error) {
+       }
+      failure:^(NSURLSessionTask *operation, NSError *error) {
          NSLog(@"Error: %@", error);
          UIAlertController *downloadErrorAlert = [UIAlertController alertControllerWithTitle:@"Download Error" message:@"Couldn't load menus" preferredStyle:UIAlertControllerStyleAlert];
          [downloadErrorAlert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
          }]];
        }];
 
+  
+  // button is unselected - store not yet favorited
+  [self.faveButton setTitle:@"Add to Favorites" forState:UIControlStateNormal];
+  [self.faveButton setTitleColor:self.ddRedColor forState:UIControlStateNormal];
+  
+  // button has been selected - store is a fave
+  [self.faveButton setTitle:@"Favorited" forState:UIControlStateSelected];
+  [self.faveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  [[self.faveButton layer] setBorderWidth:2.0f];
-  [[self.faveButton layer] setBorderColor:[UIColor colorWithRed:246.0/255 green:24.0/255 blue:69.0/255 alpha:1.0].CGColor];
+
+  NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+  NSArray *favesArray = [prefs arrayForKey:@"FavoriteStores"];
+
+  if (!favesArray) {
+    [prefs setObject:@[] forKey:@"FavoriteStores"];
+    [prefs synchronize];
+  }
+  
+  if (![favesArray containsObject:self.storeId]) {    // not yet a fave
+    [self.faveButton setSelected:NO];
+    self.starImageView.hidden = YES;
+    [[self.faveButton layer] setBorderWidth:2.0f];
+    [[self.faveButton layer] setBorderColor:self.ddRedColor.CGColor];
+  } else {                // exists as a fave
+    [self.faveButton setSelected:YES];
+    self.starImageView.hidden = NO;
+    [self.faveButton setBackgroundColor:self.ddRedColor];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,6 +131,42 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
   return @"Menu";
+}
+
+#pragma mark - Favoriting
+
+- (IBAction)pressedFavoriteButton:(id)sender {
+  
+  NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *favesArray = [NSMutableArray arrayWithArray:[prefs arrayForKey:@"FavoriteStores"]];
+  
+  if (![favesArray containsObject:self.storeId]) {    // not yet a fave
+    // update defaults
+    [favesArray addObject:self.storeId];
+    [prefs setObject:favesArray
+              forKey:@"FavoriteStores"];
+    [prefs synchronize];
+
+    [self.faveButton setSelected:YES];
+    [self.faveButton setBackgroundColor:self.ddRedColor];
+
+    self.starImageView.hidden = NO;
+  } else {                // exists as a fave
+    // update defaults
+    [favesArray removeObject:self.storeId];
+    [prefs setObject:favesArray
+              forKey:@"FavoriteStores"];
+    [prefs synchronize];
+
+    [self.faveButton setSelected:NO	];
+    [self.faveButton setBackgroundColor:[UIColor whiteColor]];
+
+    self.starImageView.hidden = YES;
+  }
+  
+  [self.faveButton setNeedsDisplay];
+
+  
 }
 
 

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) UIColor *ddRedColor;
 @end
 
 @implementation AppDelegate
@@ -17,8 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
-  [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:246.0/255 green:24.0/255 blue:69.0/255 alpha:1.0]];
-  [[UITabBar appearance] setTintColor:[UIColor colorWithRed:246.0/255 green:24.0/255 blue:69.0/255 alpha:1.0]];
+  self.ddRedColor = [UIColor colorWithRed:246.0/255 green:24.0/255 blue:69.0/255 alpha:1.0];
+  [[UINavigationBar appearance] setTintColor:self.ddRedColor];
+  [[UITabBar appearance] setTintColor:self.ddRedColor];
+
   return YES;
 }
 
