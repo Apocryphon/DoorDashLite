@@ -16,6 +16,7 @@
 		2C2EAADE1E05DAE000367160 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C2EAADD1E05DAE000367160 /* MapKit.framework */; };
 		2C2EAAE11E05DC8300367160 /* DDStoresListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAAE01E05DC8300367160 /* DDStoresListViewController.m */; };
 		2C2EAAE51E06121300367160 /* DDStoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EAAE41E06121300367160 /* DDStoreTableViewCell.m */; };
+		2CAF68AD1E1289C3008150BE /* DDStoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAF68AC1E1289C3008150BE /* DDStoreDetailViewController.m */; };
 		CE39A29D38FDD0AA15BD7DAD /* Pods_DoorDash_Lite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19093292D3470E05C8466FD4 /* Pods_DoorDash_Lite.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,8 @@
 		2C2EAAE01E05DC8300367160 /* DDStoresListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStoresListViewController.m; sourceTree = "<group>"; };
 		2C2EAAE31E06121300367160 /* DDStoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStoreTableViewCell.h; sourceTree = "<group>"; };
 		2C2EAAE41E06121300367160 /* DDStoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStoreTableViewCell.m; sourceTree = "<group>"; };
+		2CAF68AB1E1289C3008150BE /* DDStoreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStoreDetailViewController.h; sourceTree = "<group>"; };
+		2CAF68AC1E1289C3008150BE /* DDStoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStoreDetailViewController.m; sourceTree = "<group>"; };
 		6ABCF876D325EE1E035EACEE /* Pods-DoorDash Lite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash Lite.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DoorDash Lite/Pods-DoorDash Lite.debug.xcconfig"; sourceTree = "<group>"; };
 		6EED8A3731F87FC51E445228 /* Pods-DoorDash Lite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash Lite.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoorDash Lite/Pods-DoorDash Lite.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +86,8 @@
 				2C2EAAE01E05DC8300367160 /* DDStoresListViewController.m */,
 				2C2EAAE31E06121300367160 /* DDStoreTableViewCell.h */,
 				2C2EAAE41E06121300367160 /* DDStoreTableViewCell.m */,
+				2CAF68AB1E1289C3008150BE /* DDStoreDetailViewController.h */,
+				2CAF68AC1E1289C3008150BE /* DDStoreDetailViewController.m */,
 				2C2EAACE1E05D95600367160 /* Main.storyboard */,
 				2C2EAAD11E05D95600367160 /* Assets.xcassets */,
 				2C2EAAD31E05D95600367160 /* LaunchScreen.storyboard */,
@@ -248,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C2EAACD1E05D95600367160 /* DDMapViewController.m in Sources */,
+				2CAF68AD1E1289C3008150BE /* DDStoreDetailViewController.m in Sources */,
 				2C2EAAE51E06121300367160 /* DDStoreTableViewCell.m in Sources */,
 				2C2EAACA1E05D95600367160 /* AppDelegate.m in Sources */,
 				2C2EAAE11E05DC8300367160 /* DDStoresListViewController.m in Sources */,

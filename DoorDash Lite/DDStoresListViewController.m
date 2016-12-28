@@ -9,12 +9,13 @@
 #import "DDStoresListViewController.h"
 #import "DDStoreTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
-
+#import "DDStoreDetailViewController.h"
 
 #import "AFNetworking.h"
 
 @interface DDStoresListViewController ()
 @property (nonatomic, strong) NSArray *storesListArray;
+@property (nonatomic, strong) NSDictionary *chosenStoreDict;
 @end
 
 @implementation DDStoresListViewController
@@ -30,6 +31,8 @@
   
   self.navigationController.navigationBar.translucent = NO;
   self.tabBarController.tabBar.translucent = NO;
+
+  self.navigationItem.title = @"DoorDash";
   
   NSString *rootURLString = @"https://api.doordash.com";
   
@@ -104,6 +107,11 @@
   return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  self.chosenStoreDict = self.storesListArray[indexPath.row];
+  [self performSegueWithIdentifier:@"exploreToStoreDetail" sender:self];
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -139,14 +147,17 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+  DDStoreDetailViewController *storeDetailVC = segue.destinationViewController;
+  storeDetailVC.storeDict = self.chosenStoreDict;
+
 }
-*/
+
 
 @end

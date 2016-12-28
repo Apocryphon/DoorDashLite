@@ -82,6 +82,9 @@
     UITabBarController *tabBarVC = (UITabBarController *)segue.destinationViewController;
     DDStoresListViewController *exploreVC = (DDStoresListViewController *)tabBarVC.viewControllers[0];
     exploreVC.listLocation = self.currentLocation;
+    
+    UIBarButtonItem *mapButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav-address"] style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = mapButtonItem;
   }
 }
 
