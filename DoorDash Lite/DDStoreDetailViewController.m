@@ -25,6 +25,9 @@
 
 @implementation DDStoreDetailViewController
 
+// storage system is NSUserDefaults entry FavoriteStores
+// FavoriteStores is an NSData-converted mutable dictionary that contains dictionaries - @{ storeId : storeDict }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -46,28 +49,14 @@
 
   self.statusLabel.text = [NSString stringWithFormat:@"Free delivery in %@ mins", self.storeDict[@"asap_time"]];
 
-  NSString *rootURLString = @"https://api.doordash.com";
-  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-  NSString *menuRequestString = [NSString stringWithFormat:@"%@/v2/restaurant/%@/menu/", rootURLString, (NSNumber *)self.storeDict[@"id"]];
-  [manager GET:menuRequestString
-    parameters:nil
-      progress:nil
-       success:^(NSURLSessionTask *task, id responseObject) {
-         if ([responseObject count] > 0) {
-           weakSelf.menuDictionary = responseObject[0];     // responseObject is __NSSingleObjectArrayI
-           weakSelf.storeId = weakSelf.menuDictionary[@"id"];
-           [weakSelf.menuTableView reloadData];
-           [weakSelf.faveButton setNeedsDisplay];
-         }
-       }
-      failure:^(NSURLSessionTask *operation, NSError *error) {
-         NSLog(@"Error: %@", error);
-         UIAlertController *downloadErrorAlert = [UIAlertController alertControllerWithTitle:@"Download Error" message:@"Couldn't load menus" preferredStyle:UIAlertControllerStyleAlert];
-         [downloadErrorAlert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-         }]];
-       }];
+  // initialize a favorites entry in NSUserDefaults as necessary
+  NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+  if (![prefs dataForKey:@"FavoriteStores"]) {
+    [prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:[[NSMutableDictionary alloc] init]]
+              forKey:@"FavoriteStores"];
+    [prefs synchronize];
+  }
 
-  
   // button is unselected - store not yet favorited
   [self.faveButton setTitle:@"Add to Favorites" forState:UIControlStateNormal];
   [self.faveButton setTitleColor:self.ddRedColor forState:UIControlStateNormal];
@@ -80,24 +69,43 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-  NSArray *favesArray = [prefs arrayForKey:@"FavoriteStores"];
+  __weak typeof(self) weakSelf = self;
+  NSString *rootURLString = @"https://api.doordash.com";
+  AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+  NSString *menuRequestString = [NSString stringWithFormat:@"%@/v2/restaurant/%@/menu/", rootURLString, (NSNumber *)self.storeDict[@"id"]];
+  [manager GET:menuRequestString
+    parameters:nil
+      progress:nil
+       success:^(NSURLSessionTask *task, id responseObject) {
+         if ([responseObject count] > 0) {
+           weakSelf.menuDictionary = responseObject[0];     // responseObject is __NSSingleObjectArrayI
+           weakSelf.storeId = weakSelf.menuDictionary[@"id"];
+           [weakSelf.menuTableView reloadData];
+           [weakSelf resetFaveButton];
+         }
+       }
+       failure:^(NSURLSessionTask *operation, NSError *error) {
+         NSLog(@"Error: %@", error);
+         UIAlertController *downloadErrorAlert = [UIAlertController alertControllerWithTitle:@"Download Error" message:@"Couldn't load menus" preferredStyle:UIAlertControllerStyleAlert];
+         [downloadErrorAlert addAction:[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+         }]];
+       }];
+}
 
-  if (!favesArray) {
-    [prefs setObject:@[] forKey:@"FavoriteStores"];
-    [prefs synchronize];
-  }
-  
-  if (![favesArray containsObject:self.storeId]) {    // not yet a fave
+- (void)resetFaveButton {
+  NSMutableDictionary *favesDictionary = (NSMutableDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] dataForKey:@"FavoriteStores"]];
+  if (![favesDictionary objectForKey:self.storeId]) {    // not yet a fave
     [self.faveButton setSelected:NO];
     self.starImageView.hidden = YES;
     [[self.faveButton layer] setBorderWidth:2.0f];
     [[self.faveButton layer] setBorderColor:self.ddRedColor.CGColor];
+    [self.faveButton setNeedsDisplay];
   } else {                // exists as a fave
     [self.faveButton setSelected:YES];
     self.starImageView.hidden = NO;
     [self.faveButton setBackgroundColor:self.ddRedColor];
   }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,12 +146,13 @@
 - (IBAction)pressedFavoriteButton:(id)sender {
   
   NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-  NSMutableArray *favesArray = [NSMutableArray arrayWithArray:[prefs arrayForKey:@"FavoriteStores"]];
-  
-  if (![favesArray containsObject:self.storeId]) {    // not yet a fave
+  NSMutableDictionary *favesDictionary = (NSMutableDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:[prefs dataForKey:@"FavoriteStores"]];
+
+  if (![favesDictionary objectForKey:self.storeId]) {    // not yet a fave
     // update defaults
-    [favesArray addObject:self.storeId];
-    [prefs setObject:favesArray
+    [favesDictionary setObject:self.storeDict
+                        forKey:self.storeId];
+    [prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:favesDictionary]
               forKey:@"FavoriteStores"];
     [prefs synchronize];
 
@@ -153,8 +162,8 @@
     self.starImageView.hidden = NO;
   } else {                // exists as a fave
     // update defaults
-    [favesArray removeObject:self.storeId];
-    [prefs setObject:favesArray
+    [favesDictionary removeObjectForKey:self.storeId];
+    [prefs setObject:[NSKeyedArchiver archivedDataWithRootObject:favesDictionary]
               forKey:@"FavoriteStores"];
     [prefs synchronize];
 

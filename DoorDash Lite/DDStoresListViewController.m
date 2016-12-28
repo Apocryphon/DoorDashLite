@@ -31,6 +31,16 @@
   
   self.navigationController.navigationBar.translucent = NO;
   self.tabBarController.tabBar.translucent = NO;
+  
+  if (self.tabBarController.selectedIndex == 0) {
+    [self fetchFavorites];
+  } else {
+    [self fetchLocalStores];
+  }
+  
+}
+
+- (void)fetchLocalStores {
 
   self.navigationItem.title = @"DoorDash";
   
@@ -45,7 +55,7 @@
       progress:nil
        success:^(NSURLSessionTask *task, id responseObject) {
          if ([responseObject count] > 0) {
-           weakSelf.storesListArray = responseObject;
+           weakSelf.storesListArray = responseObject;       // this is the data source for Explore
            [weakSelf.tableView reloadData];
          }
   }    failure:^(NSURLSessionTask *operation, NSError *error) {
@@ -55,7 +65,13 @@
         [weakNavController popViewControllerAnimated:YES];
     }]];
   }];
+}
+
+- (void)fetchFavorites {
+  NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+  NSDictionary *favesDictionary = (NSMutableDictionary *)[NSKeyedUnarchiver unarchiveObjectWithData:[prefs dataForKey:@"FavoriteStores"]];
   
+  self.storesListArray = [favesDictionary allValues];
   
 }
 
